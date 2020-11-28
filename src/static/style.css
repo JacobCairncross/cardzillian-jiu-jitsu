@@ -34,11 +34,16 @@ body {
     border: 3px solid black;
     display: inline-block;
     margin: 0 auto;
+
     transition: all 0.5s ease-in-out;
+    transition-property: transform, width;
 }
 
 .card.staged {
-    transform: scale(2);
+}
+
+.card.placeholder {
+    opacity: 0;
 }
 
 #stage {
