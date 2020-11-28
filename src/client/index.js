@@ -1,12 +1,16 @@
-function addCard(element, power) {
-    const cardHolder = document.getElementById("card-holder");
+import * as Colyseus from 'colyseus.js';
+import Match from './Match.js';
 
-    cardHolder.innerHTML += '<div class="card" onclick="removeCard(this)">Element: '+element+ 'Power: '+power+' </div>';
-}
+const client = new Colyseus.Client('ws://localhost:2567');
 
-function removeCard(card) {
-    card.remove();
-}
+const m = new Match(document.getElementById('stage'), { onStateChange: function() {} });
+m.begin([
+    { type: 'water', value: 5 },
+    { type: 'earth', value: 9 },
+    { type: 'air', value: 10 },
+    { type: 'water', value: 5 }
+]);
 
-window.addCard = addCard;
-window.removeCard = removeCard;
+setTimeout(function() {
+    m.playCardOther(3);
+}, 2000);
