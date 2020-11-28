@@ -1,3 +1,4 @@
+import path from "path";
 import http from "http";
 import express from "express";
 import cors from "cors";
@@ -31,6 +32,9 @@ gameServer.define('my_room', MyRoom);
 
 // register colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor());
+
+app.use('/', express.static(path.join(__dirname, 'static')));
+app.use('/js', express.static(path.join(__dirname, '..', 'dist')));
 
 gameServer.listen(port);
 console.log(`Listening on ws://localhost:${ port }`)
